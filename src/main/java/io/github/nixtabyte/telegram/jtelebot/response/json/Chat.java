@@ -75,11 +75,19 @@ public class Chat {
 
 	@JsonCreator
 	public static Chat construct(@JsonProperty("id") Long id, @JsonProperty("title") String title) {
-		final GroupChat groupChat = new GroupChat();
+		if (null == title) {
+			final Chat chat = new Chat();
 
-		groupChat.setId(id);
-		groupChat.setTitle(title);
+			chat.setId(id);
 
-		return groupChat;
+			return chat;
+		} else {
+			final GroupChat groupChat = new GroupChat();
+
+			groupChat.setId(id);
+			groupChat.setTitle(title);
+
+			return groupChat;
+		}
 	}
 }
