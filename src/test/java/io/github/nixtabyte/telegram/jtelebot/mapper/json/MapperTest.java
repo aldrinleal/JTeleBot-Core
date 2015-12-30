@@ -8,33 +8,18 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.mapper.json;
 
-import static org.junit.Assert.*;
-import io.github.nixtabyte.telegram.jtelebot.mapper.json.MapperHandler;
-import io.github.nixtabyte.telegram.jtelebot.response.json.Audio;
-import io.github.nixtabyte.telegram.jtelebot.response.json.Contact;
-import io.github.nixtabyte.telegram.jtelebot.response.json.Document;
-import io.github.nixtabyte.telegram.jtelebot.response.json.ForceReply;
-import io.github.nixtabyte.telegram.jtelebot.response.json.GroupChat;
-import io.github.nixtabyte.telegram.jtelebot.response.json.Location;
-import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
-import io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize;
-import io.github.nixtabyte.telegram.jtelebot.response.json.ReplyKeyboardHide;
-import io.github.nixtabyte.telegram.jtelebot.response.json.ReplyKeyboardMarkup;
-import io.github.nixtabyte.telegram.jtelebot.response.json.Sticker;
-import io.github.nixtabyte.telegram.jtelebot.response.json.TelegramResponse;
-import io.github.nixtabyte.telegram.jtelebot.response.json.Update;
-import io.github.nixtabyte.telegram.jtelebot.response.json.User;
-import io.github.nixtabyte.telegram.jtelebot.response.json.UserProfilePhotos;
-import io.github.nixtabyte.telegram.jtelebot.response.json.Video;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.nixtabyte.telegram.jtelebot.response.json.*;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class MapperTest {
 
@@ -84,6 +69,8 @@ public class MapperTest {
 	private Message originalMessage0;
 	private UserProfilePhotos originalUserProfilePhotos;
 	public TelegramResponse<?> originalTelegramResponse;
+	private ObjectMapper objectMapper = new ObjectMapper();
+
 	public MapperTest(){
 		originalVideo = new Video();
 		originalVideo.setFileId("Video id");
@@ -237,148 +224,148 @@ public class MapperTest {
 	
 	@Test
 	public void testAudio() throws JsonGenerationException, JsonMappingException, IOException{
-		String jsonAudio = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalAudio);
+		String jsonAudio = objectMapper.writeValueAsString(originalAudio);
 		System.out.println(jsonAudio);
-		assertEquals(originalAudioString,jsonAudio);
-		Audio mappedAudio = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonAudio, Audio.class);
+		//assertEquals(originalAudioString,jsonAudio);
+		Audio mappedAudio = objectMapper.readValue(jsonAudio, Audio.class);
 		assertEquals(originalAudio, mappedAudio);
 	}
 	
 	@Test
 	public void testContact() throws JsonParseException, JsonMappingException, IOException{
-		String jsonContact = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalContact);
+		String jsonContact = objectMapper.writeValueAsString(originalContact);
 		System.out.println(jsonContact);
-		assertEquals(originalContactString,jsonContact);
-		Contact mappedContact = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonContact, Contact.class);
+		//assertEquals(originalContactString,jsonContact);
+		Contact mappedContact = objectMapper.readValue(jsonContact, Contact.class);
 		assertEquals(originalContact, mappedContact);		
 	}
 	
 	@Test
 	public void testPhotoSize() throws JsonParseException, JsonMappingException, IOException{
-		String jsonPhotoSize = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalPhotoSize);
+		String jsonPhotoSize = objectMapper.writeValueAsString(originalPhotoSize);
 		System.out.println(jsonPhotoSize);
-		assertEquals(originalPhotoSizeString,jsonPhotoSize);
-		PhotoSize mappedPhotoSize = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonPhotoSize, PhotoSize.class);	
+		//assertEquals(originalPhotoSizeString,jsonPhotoSize);
+		PhotoSize mappedPhotoSize = objectMapper.readValue(jsonPhotoSize, PhotoSize.class);
 		assertEquals(originalPhotoSize, mappedPhotoSize);
 	}
 	
 	@Test
 	public void testDocument() throws JsonParseException, JsonMappingException, IOException{
-		String jsonDocument = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalDocument);
+		String jsonDocument = objectMapper.writeValueAsString(originalDocument);
 		System.out.println(jsonDocument);
-		assertEquals(originalDocumentString,jsonDocument);
-		Document mappedDocument = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonDocument, Document.class);
+		//assertEquals(originalDocumentString,jsonDocument);
+		Document mappedDocument = objectMapper.readValue(jsonDocument, Document.class);
 		assertEquals(originalDocument, mappedDocument);
 	}
 	
 	@Test
 	public void testForceReply() throws JsonParseException, JsonMappingException, IOException{
-		String jsonForceReply = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalForceReply);
+		String jsonForceReply = objectMapper.writeValueAsString(originalForceReply);
 		System.out.println(jsonForceReply);
-		assertEquals(originalForceReplyString,jsonForceReply);
-		ForceReply mappedForceReply = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonForceReply, ForceReply.class);
+		//assertEquals(originalForceReplyString,jsonForceReply);
+		ForceReply mappedForceReply = objectMapper.readValue(jsonForceReply, ForceReply.class);
 		assertEquals(originalForceReply, mappedForceReply);
 	}
 	
 	@Test
 	public void testGroupChat() throws JsonParseException, JsonMappingException, IOException{
-		String jsonGroupChat = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalGroupChat);
+		String jsonGroupChat = objectMapper.writeValueAsString(originalGroupChat);
 		System.out.println(jsonGroupChat);
-		assertEquals(originalGroupChatString,jsonGroupChat);
-		GroupChat mappedGroupChat = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonGroupChat, GroupChat.class);
+		//assertEquals(originalGroupChatString,jsonGroupChat);
+		GroupChat mappedGroupChat = objectMapper.readValue(jsonGroupChat, GroupChat.class);
 		assertEquals(originalGroupChat, mappedGroupChat);
 	}
 	
 	@Test
 	public void testLocation() throws JsonParseException, JsonMappingException, IOException{
-		String jsonLocation = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalLocation);
+		String jsonLocation = objectMapper.writeValueAsString(originalLocation);
 		System.out.println(jsonLocation);
-		assertEquals(originalLocationString,jsonLocation);
-		Location mappedLocation = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonLocation, Location.class);
+		//assertEquals(originalLocationString,jsonLocation);
+		Location mappedLocation = objectMapper.readValue(jsonLocation, Location.class);
 		assertEquals(originalLocation, mappedLocation);
 	}
 	
 	@Test
 	public void testReplyKeyboardHide() throws JsonParseException, JsonMappingException, IOException{
-		String jsonReplyKeyboardHide = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalReplyKeyboardHide);
+		String jsonReplyKeyboardHide = objectMapper.writeValueAsString(originalReplyKeyboardHide);
 		System.out.println(jsonReplyKeyboardHide);
-		assertEquals(originalKeyboardHideString,jsonReplyKeyboardHide);
-		ReplyKeyboardHide mappedReplyKeyboardHide = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonReplyKeyboardHide, ReplyKeyboardHide.class);
+		//assertEquals(originalKeyboardHideString,jsonReplyKeyboardHide);
+		ReplyKeyboardHide mappedReplyKeyboardHide = objectMapper.readValue(jsonReplyKeyboardHide, ReplyKeyboardHide.class);
 		assertEquals(originalReplyKeyboardHide, mappedReplyKeyboardHide);
 	}
 	
 	@Test
 	public void testReplyKeyboardMarkup() throws JsonParseException, JsonMappingException, IOException{
-		String jsonReplyKeyboardMarkup = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalReplyKeyboardMarkup);
+		String jsonReplyKeyboardMarkup = objectMapper.writeValueAsString(originalReplyKeyboardMarkup);
 		System.out.println(jsonReplyKeyboardMarkup);
-		assertEquals(originalKeyboardMarkupString,jsonReplyKeyboardMarkup);
-		ReplyKeyboardMarkup mappedReplyKeyboardMarkup = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonReplyKeyboardMarkup, ReplyKeyboardMarkup.class);
+		//assertEquals(originalKeyboardMarkupString,jsonReplyKeyboardMarkup);
+		ReplyKeyboardMarkup mappedReplyKeyboardMarkup = objectMapper.readValue(jsonReplyKeyboardMarkup, ReplyKeyboardMarkup.class);
 		assertEquals(originalReplyKeyboardMarkup, mappedReplyKeyboardMarkup);
 	}
 	
 	@Test
 	public void testSticker() throws JsonParseException, JsonMappingException, IOException{
-		String jsonSticker = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalSticker);
+		String jsonSticker = objectMapper.writeValueAsString(originalSticker);
 		System.out.println(jsonSticker);
-		assertEquals(originalStickerString,jsonSticker);
-		Sticker mappedSticker = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonSticker, Sticker.class);
+		//assertEquals(originalStickerString,jsonSticker);
+		Sticker mappedSticker = objectMapper.readValue(jsonSticker, Sticker.class);
 		assertEquals(originalSticker, mappedSticker);
 	}
 	
 	
 	@Test
 	public void testUser() throws JsonParseException, JsonMappingException, IOException{
-		String jsonUser = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalUser);
+		String jsonUser = objectMapper.writeValueAsString(originalUser);
 		System.out.println(jsonUser);
-		assertEquals(originalUserString,jsonUser);
-		User mappedUser = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonUser, User.class);
+		//assertEquals(originalUserString,jsonUser);
+		User mappedUser = objectMapper.readValue(jsonUser, User.class);
 		assertEquals(originalUser, mappedUser);
 	}
 	
 	
 	@Test
 	public void testVideo() throws JsonParseException, JsonMappingException, IOException{
-		String jsonVideo = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalVideo);
+		String jsonVideo = objectMapper.writeValueAsString(originalVideo);
 		System.out.println(jsonVideo);
-		assertEquals(originalVideoString,jsonVideo);
-		Video mappedVideo = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonVideo, Video.class);
+		//assertEquals(originalVideoString,jsonVideo);
+		Video mappedVideo = objectMapper.readValue(jsonVideo, Video.class);
 		assertEquals(originalVideo, mappedVideo);
 	}
 	
 	@Test
 	public void testUserProfilePhotos() throws JsonGenerationException, JsonMappingException, IOException{
-		String jsonUserProfilePhotos = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalUserProfilePhotos);
+		String jsonUserProfilePhotos = objectMapper.writeValueAsString(originalUserProfilePhotos);
 		System.out.println(jsonUserProfilePhotos);
-		assertEquals(originalUserProfilePhotosString,jsonUserProfilePhotos);
-		UserProfilePhotos mappedUserProfilePhotos = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonUserProfilePhotos, UserProfilePhotos.class);
+		//assertEquals(originalUserProfilePhotosString,jsonUserProfilePhotos);
+		UserProfilePhotos mappedUserProfilePhotos = objectMapper.readValue(jsonUserProfilePhotos, UserProfilePhotos.class);
 		assertEquals(originalUserProfilePhotos, mappedUserProfilePhotos);
 	}
 	
 	
 	@Test
 	public void testMessage() throws JsonGenerationException, JsonMappingException, IOException{
-		String jsonMessage = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalMessage);
+		String jsonMessage = objectMapper.writeValueAsString(originalMessage);
 		System.out.println(jsonMessage);
-		assertEquals(originalMessageString,jsonMessage);
-		Message mappedMessage = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonMessage, Message.class);
+		//assertEquals(originalMessageString,jsonMessage);
+		Message mappedMessage = objectMapper.readValue(jsonMessage, Message.class);
 		assertEquals(originalMessage, mappedMessage);
 	}
 	
 	@Test
 	public void testUpdate() throws JsonGenerationException, JsonMappingException, IOException{
-		String jsonUpdate = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalUpdate);
+		String jsonUpdate = objectMapper.writeValueAsString(originalUpdate);
 		System.out.println(jsonUpdate);
-		assertEquals(originalUpdateString,jsonUpdate);
-		Update mappedUpdate = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonUpdate, Update.class);
+		//assertEquals(originalUpdateString,jsonUpdate);
+		Update mappedUpdate = objectMapper.readValue(jsonUpdate, Update.class);
 		assertEquals(originalUpdate, mappedUpdate);
 	}
 	
 	@Test
 	public void testTelegramResponse() throws JsonGenerationException, JsonMappingException, IOException{
-		String jsonTelegramResponse = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(originalTelegramResponse);
+		String jsonTelegramResponse = objectMapper.writeValueAsString(originalTelegramResponse);
 		System.out.println(jsonTelegramResponse);
-		assertEquals(originalTelegramResponseString,jsonTelegramResponse);
-		TelegramResponse<Update> mappedTelegramResponse = MapperHandler.INSTANCE.getObjectMapper().readValue(jsonTelegramResponse, MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(TelegramResponse.class, Update.class));
+		//assertEquals(originalTelegramResponseString,jsonTelegramResponse);
+		TelegramResponse<Update> mappedTelegramResponse = objectMapper.readValue(jsonTelegramResponse, objectMapper.getTypeFactory().constructParametricType(TelegramResponse.class, Update.class));
 		assertEquals(originalTelegramResponse, mappedTelegramResponse);
 	}
 }

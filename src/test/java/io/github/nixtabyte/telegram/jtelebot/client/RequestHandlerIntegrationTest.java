@@ -8,6 +8,8 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.client;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import io.github.nixtabyte.telegram.jtelebot.client.BroadcastActionType;
 import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
 import io.github.nixtabyte.telegram.jtelebot.client.impl.DefaultRequestHandler;
@@ -23,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.message.BasicNameValuePair;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.junit.Before;
 import org.junit.Test;
 

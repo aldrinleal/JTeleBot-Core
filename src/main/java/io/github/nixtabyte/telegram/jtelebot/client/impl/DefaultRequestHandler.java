@@ -9,20 +9,14 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.client.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.nixtabyte.telegram.jtelebot.client.HttpClientFactory;
 import io.github.nixtabyte.telegram.jtelebot.client.HttpProxy;
 import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
 import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
 import io.github.nixtabyte.telegram.jtelebot.exception.TelegramServerException;
-import io.github.nixtabyte.telegram.jtelebot.mapper.json.MapperHandler;
 import io.github.nixtabyte.telegram.jtelebot.request.TelegramRequest;
 import io.github.nixtabyte.telegram.jtelebot.response.json.TelegramResponse;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.text.MessageFormat;
-
 import org.apache.http.Consts;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -34,6 +28,11 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.MessageFormat;
 /**
 *
 * This is the default request handler
@@ -50,6 +49,16 @@ public class DefaultRequestHandler implements RequestHandler {
 	private HttpClient httpClient;
 	private HttpProxy httpProxy;
 	private String token;
+
+	private ObjectMapper objectMapper;
+
+	public ObjectMapper getObjectMapper() {
+		return objectMapper;
+	}
+
+	public void setObjectMapper(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper;
+	}
 
 	/**
 	 * <p>Constructor for DefaultRequestHandler.</p>
@@ -146,15 +155,13 @@ public class DefaultRequestHandler implements RequestHandler {
 			final Class<?> resultTypeClass) throws JsonParsingException {
 		try {
 			LOG.trace(jsonResponse);
-			final TelegramResponse<?> telegramResponse = (TelegramResponse<?>) MapperHandler.INSTANCE
-					.getObjectMapper().readValue(
-							jsonResponse,
-							MapperHandler.INSTANCE
-									.getObjectMapper()
-									.getTypeFactory()
-									.constructParametricType(
-											TelegramResponse.class,
-											resultTypeClass));
+			final TelegramResponse<?> telegramResponse = (TelegramResponse<?>) objectMapper.readValue(
+					jsonResponse,
+					objectMapper
+							.getTypeFactory()
+							.constructParametricType(
+									TelegramResponse.class,
+									resultTypeClass));
 			LOG.trace(telegramResponse.toString());
 			return telegramResponse;
 

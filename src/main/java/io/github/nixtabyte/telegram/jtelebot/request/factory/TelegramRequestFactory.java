@@ -8,19 +8,18 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.request.factory;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.nixtabyte.telegram.jtelebot.client.BroadcastActionType;
 import io.github.nixtabyte.telegram.jtelebot.client.RequestType;
 import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
-import io.github.nixtabyte.telegram.jtelebot.mapper.json.MapperHandler;
 import io.github.nixtabyte.telegram.jtelebot.request.TelegramRequest;
 import io.github.nixtabyte.telegram.jtelebot.response.json.CustomReplyKeyboard;
+import org.apache.http.message.BasicNameValuePair;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.http.message.BasicNameValuePair;
 
 
 /**
@@ -33,6 +32,16 @@ import org.apache.http.message.BasicNameValuePair;
  * @since 0.0.1
  */
 public final class TelegramRequestFactory {
+	static ObjectMapper objectMapper;
+
+	public static ObjectMapper getObjectMapper() {
+		return objectMapper;
+	}
+
+	public static void setObjectMapper(ObjectMapper objectMapper) {
+		TelegramRequestFactory.objectMapper = objectMapper;
+	}
+
 	/**
 	 * TODO:
 	 * Validation class...
@@ -61,8 +70,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A TelegramRequest prepared to consume the sendMessage method
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -103,8 +110,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A request to use the sendPhoto method of the Telegram Bot api
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -128,8 +133,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A request to use the sendPhoto method of the Telegram Bot api
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -152,8 +155,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A request to use the sendAudio method of the Telegram Bot api
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -174,8 +175,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A request to use the sendAudio method of the Telegram Bot api
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -197,8 +196,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A telegram request ready to consume the sendDocument request method of the Telegram Bot Api
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -219,8 +216,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A telegram request ready to consume the sendDocument request method of the Telegram Bot Api
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -242,8 +237,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A telegram request ready to consume the sendSticker request method of the Telegram Bot Api
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -265,8 +258,6 @@ public final class TelegramRequestFactory {
 	 * @return A telegram request ready to consume the sendSticker request method of the Telegram Bot Api
 	 * @throws JsonParsingException 
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 */
 	public static TelegramRequest createSendStickerRequest(final long chatId,final String stickerId, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonParsingException{
@@ -287,8 +278,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A telegram request ready to consume the sendVideo request method of the Telegram Bot Api
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -309,8 +298,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A telegram request ready to consume the sendVideo request method of the Telegram Bot Api
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -334,8 +321,6 @@ public final class TelegramRequestFactory {
 	 * @param customReplyKeyboard Optional - Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
 	 * @return A telegram request ready to consume the sendLocation request method of the Telegram Bot Api
 	 * @see TelegramRequest
-	 * @throws org.codehaus.jackson.JsonGenerationException if any.
-	 * @throws org.codehaus.jackson.map.JsonMappingException if any.
 	 * @throws java.io.IOException if any.
 	 * @throws JsonParsingException 
 	 */
@@ -432,7 +417,7 @@ public final class TelegramRequestFactory {
 	private static void addIfNotNull(final String name, final CustomReplyKeyboard customReplyKeyboard, List <BasicNameValuePair>basicNameValuePair) throws JsonParsingException{
 		if(customReplyKeyboard!=null){
 			try {
-				final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
+				final String jsonString = objectMapper.writeValueAsString(customReplyKeyboard);
 				basicNameValuePair.add(new BasicNameValuePair(name,jsonString));
 			} catch (IOException e) {
 				throw new JsonParsingException(e);

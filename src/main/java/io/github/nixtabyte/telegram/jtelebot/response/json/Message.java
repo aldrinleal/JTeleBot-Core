@@ -8,12 +8,10 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
-import io.github.nixtabyte.telegram.jtelebot.mapper.json.MapperHandler;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.Arrays;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
@@ -176,21 +174,6 @@ public class Message {
 
 	public Chat getChat() {
 		return chat;
-	}
-
-	@JsonProperty
-	public void setChat(final JsonNode chat) {
-		if (chat != null
-				&& (chat.toString() != null && chat.toString().length() != 0)) {
-			if (chat.toString().contains("title")) {// must be groupchat
-				this.chat = MapperHandler.INSTANCE.getObjectMapper()
-						.convertValue(chat, GroupChat.class);
-			
-			} else if (chat.toString().contains("first_name")) {// must be user
-				this.chat = MapperHandler.INSTANCE.getObjectMapper()
-						.convertValue(chat, User.class);
-			}
-		}
 	}
 
 	public void setChat(final Chat chat) {

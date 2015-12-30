@@ -9,7 +9,8 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
 *
@@ -17,7 +18,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 *
 * @since 0.0.1
 */
-public class Chat{
+public class Chat {
 
 	/**
 	 * Unique identifier for this user or group chat
@@ -72,7 +73,13 @@ public class Chat{
 		return "Chat [id=" + id + "]";
 	}
 
+	@JsonCreator
+	public static Chat construct(@JsonProperty("id") Long id, @JsonProperty("title") String title) {
+		final GroupChat groupChat = new GroupChat();
 
-	
-	
+		groupChat.setId(id);
+		groupChat.setTitle(title);
+
+		return groupChat;
+	}
 }

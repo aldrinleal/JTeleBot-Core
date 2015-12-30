@@ -12,7 +12,8 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
 *
 * ForceReplay

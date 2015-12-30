@@ -9,9 +9,10 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 /**
 *
 * The response from Telegram

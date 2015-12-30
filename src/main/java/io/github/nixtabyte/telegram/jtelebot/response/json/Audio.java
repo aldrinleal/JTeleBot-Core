@@ -8,7 +8,8 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *
@@ -20,28 +21,25 @@ public class Audio{
 	/**
 	 * Unique identifier for this file
 	 */
-	@JsonProperty("file_id")
 	private String fileId;
 	/**
 	 * Duration of the audio in seconds as defined by sender
 	 */
-	@JsonProperty("duration")
 	private Integer duration;
 	/**
 	 *  Optional. MIME type of the file as defined by sender
 	 */
-	@JsonProperty("mime_type")
 	private String mimeType;
 	/**
 	 * Optional. File size
 	 */
-	@JsonProperty("file_size")
 	private Integer fileSize;
 	/**
 	 * <p>Getter for the field <code>fileId</code>.</p>
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
+	@JsonProperty("file_id")
 	public String getFileId() {
 		return fileId;
 	}
@@ -58,6 +56,7 @@ public class Audio{
 	 *
 	 * @return a {@link java.lang.Integer} object.
 	 */
+	@JsonProperty("duration")
 	public Integer getDuration() {
 		return duration;
 	}
@@ -74,6 +73,7 @@ public class Audio{
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
+	@JsonProperty("mime_type")
 	public String getMimeType() {
 		return mimeType;
 	}
@@ -90,6 +90,7 @@ public class Audio{
 	 *
 	 * @return a {@link java.lang.Integer} object.
 	 */
+	@JsonProperty("file_size")
 	public Integer getFileSize() {
 		return fileSize;
 	}
