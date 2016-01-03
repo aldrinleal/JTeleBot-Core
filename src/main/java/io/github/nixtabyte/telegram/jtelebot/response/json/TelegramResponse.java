@@ -10,6 +10,7 @@
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class TelegramResponse<T> {
 	private Integer errorCode;
 	
 	@JsonProperty("result")
-	private List<T> result;
+	private JsonNode result;
 
 	/**
 	 * <p>isSuccessful.</p>
@@ -97,26 +98,6 @@ public class TelegramResponse<T> {
 	public void setErrorCode(final Integer errorCode) {
 		this.errorCode = errorCode;
 	}
-
-
-	/**
-	 * <p>Getter for the field <code>result</code>.</p>
-	 *
-	 * @return a {@link java.util.List} object.
-	 */
-	public List<T> getResult() {
-		return result;
-	}
-
-	/**
-	 * <p>Setter for the field <code>result</code>.</p>
-	 *
-	 * @param result a {@link java.util.List} object.
-	 */
-	public void setResult(final List<T> result) {
-		this.result = result;
-	}
-
 
 	/** {@inheritDoc} */
 	@Override
@@ -175,7 +156,11 @@ public class TelegramResponse<T> {
 				+ result + "]";
 	}
 
+	public JsonNode getResult() {
+		return result;
+	}
 
-
-	
+	public void setResult(JsonNode result) {
+		this.result = result;
+	}
 }

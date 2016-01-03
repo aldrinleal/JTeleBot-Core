@@ -11,6 +11,7 @@ package io.github.nixtabyte.telegram.jtelebot.mapper.json;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.nixtabyte.telegram.jtelebot.response.json.*;
 import org.junit.Test;
@@ -210,18 +211,13 @@ public class MapperTest {
 		originalTelegramResponse = new TelegramResponse<Update>();
 		originalTelegramResponse.setDescription("description of the response");
 		originalTelegramResponse.setErrorCode(0);
-		List <Update>sel = new ArrayList<Update>();
-		sel.add(originalUpdate);
-		helper(sel);
+
+		originalTelegramResponse.setResult(objectMapper.convertValue(originalUpdate, JsonNode.class));
+
 		originalTelegramResponse.setSuccessful(true);
 		
 	}
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private void helper(List list) {
-		  originalTelegramResponse.setResult(list);
-		}
-	
+
 	@Test
 	public void testAudio() throws JsonGenerationException, JsonMappingException, IOException{
 		String jsonAudio = objectMapper.writeValueAsString(originalAudio);
